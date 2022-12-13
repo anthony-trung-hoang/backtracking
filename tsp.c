@@ -16,12 +16,36 @@ void input()
     cm = 1000000000; // min value in cost matrix
     scanf("%d", &n); // number of cities
     for (int i = 1; i <= n; i++)
+    {
         for (int j = 1; j <= n; j++)
         {
             scanf("%d", &c[i][j]);
             if (i != j && c[i][j] < cm)
                 cm = c[i][j];
         }
+    }
+}
+
+void userInput()
+{
+    cm = 1000000000; // min value in cost matrix
+    printf("Nhap vao so thanh pho!\n");
+    scanf("%d", &n); // number of cities
+    printf("Nhap vao ma tran chi phi!\n");
+    for (int i = 1; i <= n; i++)
+    {
+        for (int j = 1; j <= n; j++)
+        {
+            printf("Nhap vao chi phi di tu thanh pho %d den thanh pho %d\n", i, j);
+            if (i == j)
+            {
+                printf("Chu y: chi phi tu thanh pho i den chinh no la 0. Hay nhap 0\n");
+            }
+            scanf("%d", &c[i][j]);
+            if (i != j && c[i][j] < cm)
+                cm = c[i][j];
+        }
+    }
 }
 
 // after input(): we got a n x n cost matrix and cm is the min value in the matrix
@@ -95,12 +119,40 @@ void Try_B_B(int k)
 
 int main()
 {
-    char *filename = "tsp.txt";
-    freopen(filename, "r", stdin);
-    input();
+    int choice;
+    char *filename;
+    do
+    {
+        printf("Chon dau vao\n");
+        printf("1. Ban phim\n");
+        printf("2. File\n");
+        printf("3. Thoat\n");
+        scanf("%d", &choice);
+
+        switch (choice)
+        {
+        case 1:
+            userInput();
+            break;
+        case 2:
+            fflush(stdin);
+            printf("Nhap ten file\n");
+            gets(filename);
+            fflush(stdin);
+            freopen(filename, "r", stdin);
+            input();
+            break;
+        case 3:
+            printf("Goodbye\n");
+            exit(1);
+            break;
+        default:
+            printf("Wrong Choice. Enter again\n");
+            break;
+        }
+    } while (!(choice == 1 || choice == 2 || choice == 3));
     printf("Cost matrix: \n");
     print();
-
     for (int v = 1; v <= n; v++)
         visited[v] = 0;
     f = 0;
