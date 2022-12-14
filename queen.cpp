@@ -8,8 +8,6 @@ int flag[N];
 int chessBoard[N][N];
 const char BLACK = 219;
 const char WHITE = 32;
-const int SIZE = 8;
-const int BLOCK = 5;
 
 int count_sol = 1;
 
@@ -38,7 +36,7 @@ void printChessboard()
                     {
                         if ((chessBoard[i][j]) == 1)
                         {
-                            if (u == 2 && (k == 4))
+                            if (u == 2 && k == 4)
                                 cout << "Q";
                             else
                             {
@@ -57,7 +55,7 @@ void printChessboard()
                     {
                         if ((chessBoard[i][j]) == 1)
                         {
-                            if (u == 2 && (k == 4))
+                            if (u == 2 && k == 4)
                                 cout << "Q";
                             else
                             {
