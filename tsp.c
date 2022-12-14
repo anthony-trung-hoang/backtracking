@@ -39,7 +39,7 @@ void userInput()
             printf("Nhap vao chi phi di tu thanh pho %d den thanh pho %d\n", i, j);
             if (i == j)
             {
-                printf("Chu y: chi phi tu thanh pho i den chinh no la 0. Hay nhap 0\n");
+                printf("\tChu y: chi phi tu thanh pho i den chinh no la 0. Hay nhap 0\n");
             }
             scanf("%d", &c[i][j]);
             if (i != j && c[i][j] < cm)
@@ -151,7 +151,7 @@ int main()
             break;
         }
     } while (!(choice == 1 || choice == 2 || choice == 3));
-    printf("Cost matrix: \n");
+    printf("Ma tran chi phi: \n");
     print();
     for (int v = 1; v <= n; v++)
         visited[v] = 0;

@@ -38,7 +38,7 @@ void printChessboard()
                     {
                         if ((chessBoard[i][j]) == 1)
                         {
-                            if (u == 2 && (k >= 3 && k <= 5))
+                            if (u == 2 && (k == 4))
                                 cout << "Q";
                             else
                             {
@@ -57,7 +57,7 @@ void printChessboard()
                     {
                         if ((chessBoard[i][j]) == 1)
                         {
-                            if (u == 2 && (k >= 3 && k <= 5))
+                            if (u == 2 && (k == 4))
                                 cout << "Q";
                             else
                             {
