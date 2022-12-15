@@ -15,64 +15,18 @@ int cm;
 
 void input()
 {
-    cm = 1000000000; // min value in cost matrix
-    scanf("%d", &n); // number of cities
+    cm = -1000000000; // min value in cost matrix
+    scanf("%d", &n);  // number of cities
     for (int i = 1; i <= n; i++)
     {
         for (int j = 1; j <= n; j++)
         {
             scanf("%d", &c[i][j]);
-            if (i != j && c[i][j] < cm)
+            if (i != j && c[i][j] > cm)
                 cm = c[i][j];
         }
     }
 }
-
-void userInput()
-{
-    cm = 1000000000; // min value in cost matrix
-    printf("Nhap vao so thanh pho!\n");
-    scanf("%d", &n); // number of cities
-    printf("Nhap vao ma tran chi phi!\n");
-    for (int i = 1; i <= n; i++)
-    {
-        for (int j = 1; j <= n; j++)
-        {
-            printf("Nhap vao chi phi di tu thanh pho %d den thanh pho %d\n", i, j);
-            if (i == j)
-            {
-                printf("\tChu y: chi phi tu thanh pho i den chinh no la 0. Hay nhap 0\n");
-            }
-            scanf("%d", &c[i][j]);
-            if (i != j && c[i][j] < cm)
-                cm = c[i][j];
-        }
-    }
-}
-
-void randomInput()
-{
-    cm = 1000000000; // min value in cost matrix
-    printf("Nhap vao so thanh pho!\n");
-    scanf("%d", &n); // number of cities
-    for (int i = 1; i <= n; i++)
-    {
-        for (int j = 1; j <= n; j++)
-        {
-
-            if (i == j)
-            {
-            }
-            else
-            {
-                c[i][j] = rand() % 100 + 1;
-            }
-            if (i != j && c[i][j] < cm)
-                cm = c[i][j];
-        }
-    }
-}
-
 // after input(): we got a n x n cost matrix and cm is the min value in the matrix
 
 void print()
@@ -88,13 +42,12 @@ void print()
 
 void updateBest()
 {
-    if (f + c[x[n]][x[1]] < f_best) // get back to city 1
+    if (f > f_best) // get back to city 1
     {
-        f_best = f + c[x[n]][x[1]]; // update f_best
+        f_best = f; // update f_best
         printf("Update Best: ");
         for (int i = 1; i <= n; i++)
-            printf("%d -> ", x[i]);        // print solution
-        printf("%d", 1);                   // print
+            printf("%d -> ", x[i]);        // print solution                   // print
         printf("\nf_best = %d\n", f_best); // print f_best
     }
 }
@@ -118,29 +71,29 @@ void Try(int k)
     }
 }
 
-void Try_B_B(int k)
-{
-    for (int v = 1; v <= n; v++)
-    {
-        if (visited[v] == 0)
-        {
-            x[k] = v;
-            visited[v] = 1;
-            f = f + c[x[k - 1]][x[k]];
-            if (k == n)
-                updateBest();
-            else
-            {
-                // g function
-                int g = f + cm * (n - k + 1);
-                if (g < f_best)
-                    Try(k + 1);
-            }
-            visited[v] = 0;
-            f -= c[x[k - 1]][x[k]];
-        }
-    }
-}
+// void Try_B_B(int k)
+// {
+//     for (int v = 1; v <= n; v++)
+//     {
+//         if (visited[v] == 0)
+//         {
+//             x[k] = v;
+//             visited[v] = 1;
+//             f = f + c[x[k - 1]][x[k]];
+//             if (k == n - 1)
+//                 updateBest();
+//             else
+//             {
+//                 // g function
+//                 int g = f + cm * (n - k);
+//                 if (g < f_best)
+//                     Try(k + 1);
+//             }
+//             visited[v] = 0;
+//             f -= c[x[k - 1]][x[k]];
+//         }
+//     }
+// }
 
 int main()
 {
@@ -158,7 +111,7 @@ int main()
         switch (choice)
         {
         case 1:
-            userInput();
+            // userInput();
             break;
         case 2:
             fflush(stdin);
@@ -169,7 +122,7 @@ int main()
             input();
             break;
         case 3:
-            randomInput();
+            // randomInput();
             break;
         case 4:
             printf("Goodbye\n");
@@ -185,10 +138,10 @@ int main()
     for (int v = 1; v <= n; v++)
         visited[v] = 0;
     f = 0;
-    f_best = 1000000000;
+    f_best = -1000000;
     x[1] = 1;
     visited[1] = 1;
     printf("Algorithm flow: \n");
-    Try_B_B(2);
+    Try(2);
     return 0;
 }
